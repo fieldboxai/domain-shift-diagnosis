@@ -1,0 +1,11 @@
+
+model_name: LassoVAE
+latent_dim: input_dim
+
+training_params:
+  batch_size_ratio: 0.01
+  learning_rate: 0.0005
+  tol: 0.0001
+  patience: 10
+  epochs: 1000
+  monitor: mu_mse

@@ -1,0 +1,16 @@
+source_data:
+  sampler:
+    n_observable: 64
+    n_latent: 16
+    sparsity_intensity: 0.9
+    coeffs_range: [0.1, 5]
+    random_state: 0
+  n_samples: 5000
+  gaussian_noise_std: 0.2
+
+target_data:
+  shift_source_list: ["Loc"]
+  n_samples_list: [20, 40, 80, 160, 320]
+  shift_intensity_list: [1]
+  gaussian_noise_std_list: [0.0, 0.1, 0.2, 0.5, 1]
+  random_state: 0

@@ -1,0 +1,198 @@
+# Here you can define all your data sets by using simple YAML syntax.
+#
+# Documentation for this file format can be found in "The Data Catalog"
+# Link: https://kedro.readthedocs.io/en/stable/05_data/01_data_catalog.html
+
+#### SOURCE DATA ####
+X_source_noisy:
+  type: pandas.ParquetDataSet
+  filepath: data/05_model_input/X_source_noisy.parquet
+
+X_source_true:
+  type: pandas.ParquetDataSet
+  filepath: data/05_model_input/X_source_true.parquet
+
+Z_source_true:
+  type: pandas.ParquetDataSet
+  filepath: data/05_model_input/Z_source_true.parquet
+
+source_sampler:
+  type: pickle.PickleDataSet
+  filepath: data/05_model_input/source_sampler.pkl
+
+#### TARGET DATA ####
+X_target_noisy:
+  type: pandas.ParquetDataSet
+  filepath: data/08_reporting/X_target_noisy.parquet
+
+Z_target_true:
+  type: pandas.ParquetDataSet
+  filepath: data/08_reporting/Z_target_true.parquet
+
+#### Model OUTPUT ####
+model:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+    type: domain_shift_diagnosis.extras.datasets.model_dataset.ModelDataSet
+    filepath: data/06_models/model
+
+baseline_model:
+  type: pickle.PickleDataSet
+  filepath: data/06_models/baseline_model.pkl
+
+model_parameters:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+    type: json.JSONDataSet
+    filepath: data/06_models/model_parameters.json
+
+C_pred:
+  type: pandas.ParquetDataSet
+  filepath: data/06_models/C_pred.parquet
+
+W_pred:
+  type: pandas.ParquetDataSet
+  filepath: data/06_models/W_pred.parquet
+
+mask_features:
+  type: pandas.ParquetDataSet
+  filepath: data/06_models/mask_features.parquet
+
+
+#### Model OUTPUT ####
+X_source_pred:
+  type: pandas.ParquetDataSet
+  filepath: data/07_model_output/X_source_pred.parquet
+
+Z_source_pred:
+  type: pandas.ParquetDataSet
+  filepath: data/07_model_output/Z_source_pred.parquet
+
+reconstruction_error:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+    type: pandas.ParquetDataSet
+    filepath: data/07_model_output/reconstruction_error.parquet
+
+#### MAPPING SCORES ###
+pairwise_mapping_jaccard_score:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+    type: pandas.ParquetDataSet
+    filepath: data/08_reporting/pairwise_mapping_jaccard_score.parquet
+
+#### PLOTS ####
+
+# plot: &plot
+#   type: matplotlib.MatplotlibWriter
+#   save_args: &plot_save_args
+#     format: pdf
+
+C_pred_heatmap:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+    type: matplotlib.MatplotlibWriter
+    filepath: data/08_reporting/C_pred_heatmap.pdf
+    save_args:
+      format: pdf
+
+W_pred_heatmap:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+    type: matplotlib.MatplotlibWriter
+    filepath: data/08_reporting/W_pred_heatmap.pdf
+    save_args:
+      format: pdf
+
+W_scores_heatmap:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+    type: matplotlib.MatplotlibWriter
+    filepath: data/08_reporting/W_scores_heatmap.pdf
+    save_args:
+      format: pdf
+
+Z_source_pred_cov_heatmap:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+    type: matplotlib.MatplotlibWriter
+    filepath: data/08_reporting/Z_source_pred_cov_heatmap.pdf
+    save_args:
+      format: pdf
+
+mask_features_scatter_plot:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+    type: matplotlib.MatplotlibWriter
+    filepath: data/08_reporting/mask_features_scatter_plot.pdf
+    save_args:
+      format: pdf
+
+#### SHIFT TEST OUTPUTS ####
+
+Z_target_pred:
+  type: pandas.ParquetDataSet
+  filepath: data/08_reporting/Z_target_pred.parquet
+
+Z_shift:
+  type: pandas.ParquetDataSet
+  filepath: data/08_reporting/Z_shift.parquet
+
+error_shift:
+  type: pandas.ParquetDataSet
+  filepath: data/08_reporting/error_shift.parquet
+
+covariate_shift_detection_scores:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+    type: pandas.ParquetDataSet
+    filepath: data/08_reporting/covariate_shift_detection_scores.parquet
+
+concept_shift_detection_scores:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+    type: pandas.ParquetDataSet
+    filepath: data/08_reporting/concept_shift_detection_scores.parquet
+
+##### SHIFT DETECTION SCORES PLOTS ######
+
+shift_detection_scores_heatmap:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+    type: matplotlib.MatplotlibWriter
+    filepath: data/08_reporting/shift_detection_scores_heatmap.pdf
+    save_args:
+      format: pdf
+
+#### METRICS ####
+mse:
+  type: kedro_mlflow.io.metrics.MlflowMetricDataSet
+  key: MSE
+
+mae:
+  type: kedro_mlflow.io.metrics.MlflowMetricDataSet
+  key: MAE
+
+mae_test:
+  type: kedro_mlflow.io.metrics.MlflowMetricDataSet
+  key: MAE_test
+
+mse_test:
+  type: kedro_mlflow.io.metrics.MlflowMetricDataSet
+  key: MSE_test
+
+beta:
+  type: kedro_mlflow.io.metrics.MlflowMetricDataSet
+  key: beta
+
+l1_decoder:
+  type: kedro_mlflow.io.metrics.MlflowMetricDataSet
+  key: l1_decoder
+
+latent_dim_pred:
+  type: kedro_mlflow.io.metrics.MlflowMetricDataSet
+  key: latent_dim_pred
+
+mapping_recovery_score:
+  type: kedro_mlflow.io.metrics.MlflowMetricDataSet
+  key: mapping_recovery_score

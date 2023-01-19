@@ -1,0 +1,23 @@
+LassoVAE:
+  encoder_params:
+    mu_regressor_params:
+      mlp_params: {}
+      linear_params:
+        l1_kernel: 0.0001
+    logvar_regressor_params:
+        mlp_params:
+          hidden_units: [128, 128]
+        linear_params:  {}
+
+  decoder_params:
+    mu_regressor_params:
+      mlp_params:  {}
+      linear_params:
+         l1_kernel: 0.06 # Parameter alpha in the paper
+    logvar_regressor_params:
+      mlp_params: {}
+      linear_params:  {}
+
+  beta: 0.2
+
+  variance_type: feature

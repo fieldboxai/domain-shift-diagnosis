@@ -1,0 +1,4 @@
+# UMAP parameters
+n_neighbors: 2
+min_dist: 0.1
+spread: 20

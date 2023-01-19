@@ -1,0 +1,31 @@
+SparseVAE:
+  encoder_params:
+    mu_regressor_params:
+      mlp_params:  {}
+      linear_params: {}
+    logvar_regressor_params:
+        mlp_params:
+          hidden_units: [256, 256]
+          dropout_rate: 0.15
+        linear_params:  {}
+
+  decoder_params:
+    mu_regressor_params:
+      mlp_params:  {}
+      linear_params:
+         l2_kernel: 0.001
+    logvar_regressor_params:
+      mlp_params:  {}
+      linear_params:  {}
+    sparse_mapping_params:
+      lambda0: 10
+      lambda1: 0.01
+      lambda0_step: 0.1
+      a: 1
+      b: 32
+
+  beta: 2
+
+  variance_type: feature
+
+  latent_dim: "input_dim"

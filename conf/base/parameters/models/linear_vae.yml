@@ -1,0 +1,22 @@
+LinearVAE:
+  encoder_params:
+    mu_regressor_params:
+      mlp_params: {}
+      linear_params: {}
+    logvar_regressor_params:
+        mlp_params:
+          hidden_units: [256, 256]
+          dropout_rate: 0.15
+        linear_params: {}
+
+  decoder_params:
+    mu_regressor_params:
+      mlp_params: {}
+      linear_params: {}
+    logvar_regressor_params:
+      mlp_params: {}
+      linear_params: {}
+
+  beta: 0.5
+
+  variance_type: feature
