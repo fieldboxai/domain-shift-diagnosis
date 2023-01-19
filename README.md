@@ -84,3 +84,5 @@ And we used two other notebooks to generate the additional figures.
 - "notebooks/Synthetic Data Results.ipynb" load and aggregates the results from experiments on the synthetic data.
 - "notebooks/Experiments on TEP.ipynb" applies the same experiment to the Tennesse Eastman Process data.
 
+## Copyright
+Copyright (C) 2023 IDMOG/Fieldbox
